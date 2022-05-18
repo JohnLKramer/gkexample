@@ -1,8 +1,16 @@
 plugins {
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.jetbrains.kotlin.plugin.noarg' version '1.6.10'
+	id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+	id 'org.jetbrains.kotlin.plugin.spring' version '1.6.10'
+	id 'io.gitlab.arturbosch.detekt' version '1.18.1'
+	id "org.jlleitschuh.gradle.ktlint" version "10.2.0"
 	id 'groovy'
 }
+
+apply plugin: 'kotlin'
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -20,10 +28,23 @@ dependencies {
 
 	implementation 'org.xerial:sqlite-jdbc:3.16.1'
 
+	implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.10'
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.10'
+	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.6'
+
 	implementation 'org.codehaus.groovy:groovy'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+detekt {
+	toolVersion = '1.18.1'
+	buildUponDefaultConfig = true // preconfigure defaults
+	config = files("$projectDir/config/detekt.yml")
+	reports {
+		html.enabled = true
+	}
 }

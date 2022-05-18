@@ -34,7 +34,9 @@ Other than the use of SQLite, this is a fairly standard architecture with the fo
 
 ## Change Log
 
-**2022.05.17-01** Initial Groovy Code
+**2022.05.17-01** Initial Groovy code
+
+**2022.05.18-01** Initial Kotlin code along with Ktlint and Detekt configuration. Note that this is mostly independent functionality. The only dependency is implicit. The application class ``ExampleApplication`` which is written in Groovy depends on the Kotlin code. 
 
 
 
