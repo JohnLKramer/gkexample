@@ -36,6 +36,7 @@ Other than the use of SQLite, this is a fairly standard architecture with the fo
 
 **COMMIT #1** Initial Groovy code. These changes are intended to represent a legacy application written in Groovy.
 
+**COMMIT #2** Initial Kotlin code along with Ktlint and Detekt configuration. Note that this is mostly independent functionality. There is only one dependency. The application class ``ExampleApplication`` which is written in Groovy depends on the Kotlin code.
 
 ## Building and running
 

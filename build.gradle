@@ -2,7 +2,21 @@ plugins {
 	id 'groovy'
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+
+	// Kotlin plugins
+	id 'org.jetbrains.kotlin.plugin.noarg' version '1.6.10'
+	id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+	id 'org.jetbrains.kotlin.plugin.spring' version '1.6.10' // Kotlin spring plugin allows spring to extend classes
+	id "org.jetbrains.kotlin.plugin.jpa" version "1.6.10" // Kotlin JPA plugin creates empty constructor for Hibernate
+
+	// Kotlin style/static analysis plugins
+	id 'io.gitlab.arturbosch.detekt' version '1.18.1'
+	id "org.jlleitschuh.gradle.ktlint" version "10.2.0"
 }
+
+apply plugin: 'kotlin'
+apply plugin: "kotlin-jpa"
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -21,8 +35,26 @@ dependencies {
 
 	implementation 'org.codehaus.groovy:groovy'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Kotlin dependencies
+	implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.10'
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.10'
+	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.6'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+detekt {
+	toolVersion = '1.18.1'
+	buildUponDefaultConfig = true
+	config = files("$projectDir/config/detekt.yml")
+	reports {
+		html.enabled = true
+	}
+}
+
+// Compile Kotlin first and then groovy. We have to do it this way because our Spring Boot
+// application class is written in Groovy. Gradle would figure this out but let's make it explicit.
+compileGroovy.dependsOn compileKotlin
