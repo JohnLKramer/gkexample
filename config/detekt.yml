@@ -1,0 +1,14 @@
+build:
+    maxIssues: 0 # Max numbers of issues to break the build.
+complexity:
+    LongParameterList:
+        active: true
+        ignoreAnnotated:
+            - Entity
+            - Service
+            - Component
+    TooManyFunctions:
+        ignorePrivate: true
+exceptions:
+    TooGenericExceptionCaught:
+        active: false
