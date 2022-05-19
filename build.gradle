@@ -58,3 +58,6 @@ detekt {
 // Compile Kotlin first and then groovy. We have to do it this way because our Spring Boot
 // application class is written in Groovy. Gradle would figure this out but let's make it explicit.
 compileGroovy.dependsOn compileKotlin
+
+// Add compiled Kotlin classes to groovy compile class path
+compileGroovy.classpath += files(compileKotlin.destinationDir)

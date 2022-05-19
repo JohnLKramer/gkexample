@@ -9,26 +9,27 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
-import javax.persistence.MappedSuperclass
 import javax.persistence.Table
 
 @Entity
 @Table(name = "FRUIT")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",
-        discriminatorType = DiscriminatorType.STRING)
-class Fruit {
+@DiscriminatorColumn(
+    name = "type",
+    discriminatorType = DiscriminatorType.STRING
+)
+open class Fruit(
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Integer id
+    var id: Int?,
 
     @Column(name = "variety")
-    String variety
+    var variety: String,
 
     @Column(name = "flavor")
-    String flavor
+    var flavor: String,
 
     @Column(name = "color")
-    String color
-}
+    var color: String
+)
