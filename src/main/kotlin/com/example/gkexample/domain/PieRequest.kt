@@ -4,5 +4,6 @@ data class PieRequest(
     var name: String,
     var sugarId: Long,
     var flourId: Long,
-    var butterId: Long
+    var butterId: Long,
+    var fruitType: String
 )

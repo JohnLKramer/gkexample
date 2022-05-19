@@ -22,14 +22,14 @@ open class Fruit(
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    var id: Int?,
+    open var id: Int?,
 
     @Column(name = "variety")
-    var variety: String,
+    open var variety: String,
 
     @Column(name = "flavor")
-    var flavor: String,
+    open var flavor: String,
 
     @Column(name = "color")
-    var color: String
+    open var color: String
 )

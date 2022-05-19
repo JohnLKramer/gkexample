@@ -4,6 +4,7 @@ import com.example.gkexample.domain.PieRequest
 import com.example.gkexample.entities.BakingIngredient
 import com.example.gkexample.entities.Butter
 import com.example.gkexample.entities.Flour
+import com.example.gkexample.entities.Fruit
 import com.example.gkexample.entities.Pie
 import com.example.gkexample.entities.Sugar
 import com.example.gkexample.repository.ButterRepository
@@ -17,7 +18,8 @@ class PastryService(
     private val sugarRepository: SugarRepository,
     private val butterRepository: ButterRepository,
     private val flourRepository: FlourRepository,
-    private val pieRepository: PieRepository
+    private val pieRepository: PieRepository,
+    private val fruitService: FruitServiceInterface
 ) {
     fun getIngredients(type: String): List<BakingIngredient> {
         return when (type) {
@@ -53,16 +55,23 @@ class PastryService(
         val sugarOptional = sugarRepository.findById(pieRequest.sugarId)
         val flourOptional = flourRepository.findById(pieRequest.flourId)
         val butterOptional = butterRepository.findById(pieRequest.butterId)
+        val fruit = getFruit(pieRequest.fruitType)
 
         val pie = Pie(
             name = pieRequest.name,
             sugar = sugarOptional.get(),
             flour = flourOptional.get(),
             butter = butterOptional.get(),
-            fruit = null,
+            fruit = fruit,
         )
 
         return pieRepository.save(pie)
+    }
+
+    private fun getFruit(type: String): Fruit? {
+        val fruits: List<Fruit> = fruitService.getFruit(type)
+
+        return fruits.firstOrNull()
     }
 
     fun getPieByName(name: String): Pie {

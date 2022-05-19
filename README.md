@@ -41,6 +41,8 @@ There is only one dependency. The application class ``ExampleApplication`` which
 
 **COMMIT #3** Added Fruit to Pie. This necessitates refactoring Fruit to make it Kotlin so that we can reference it from the Kotlin Pie.
 
+**COMMIT #4** Add FruitServiceInterface as a Java interface so that we can reference a Groovy service from a Kotlin service.
+
 ## Building and running
 
 ### Build 
