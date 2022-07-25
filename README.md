@@ -43,6 +43,8 @@ There is only one dependency. The application class ``ExampleApplication`` which
 
 **COMMIT #4** Add FruitServiceInterface as a Java interface so that we can reference a Groovy service from a Kotlin service.
 
+**COMMIT #5** Simplify example using Kotlin interface to reference from Groovy rather than Java interface.
+
 ## Building and running
 
 ### Build 
